@@ -8,5 +8,6 @@ namespace TodoApp.Data
         IEnumerable<Todo> FindAll();
         Todo FindById(int id);
         Todo Add(Todo todo);
+        Todo Update(Todo todo);
     }
 }

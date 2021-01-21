@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TodoApp.Domain;
+using TodoApp.Exceptions;
 
 namespace TodoApp.Data
 {
@@ -28,7 +29,24 @@ namespace TodoApp.Data
 
         public Todo FindById(int id)
         {
-            return _list.Find(t => t.Id == id);
+            var found = _list.Find(t => t.Id == id);
+            if (found == null)
+            {
+                throw new ItemNotFoundException();
+            }
+            return found;
+        }
+
+        public Todo Update(Todo todo)
+        {
+            var found = _list.Find(t => t.Id == todo.Id);
+            if(found == null)
+            {
+                throw new ItemNotFoundException();
+            }
+            found.Title = todo.Title ?? found.Title;
+            found.Body = todo.Body ?? found.Body;
+            return found;
         }
 
         private int GenerateId()
