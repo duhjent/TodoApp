@@ -7,7 +7,7 @@ using TodoApp.Exceptions;
 namespace TodoApp.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TodosController : ControllerBase
     {
         private readonly IRepository _repo;
@@ -18,10 +18,10 @@ namespace TodoApp.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Todo>> GetAll() => Ok(_repo.FindAll());
+        public ActionResult<IEnumerable<TodoVm>> GetAll() => Ok(_repo.FindAll());
 
         [HttpGet("{id}")]
-        public ActionResult<Todo> GetById(int id)
+        public ActionResult<TodoVm> GetById(int id)
         {
             try
             {
@@ -34,10 +34,10 @@ namespace TodoApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Todo> Create(Todo todo) => Ok(_repo.Add(todo));
+        public ActionResult<Todo> Create(TodoVm todo) => Ok(_repo.Add(todo));
 
         [HttpPut]
-        public ActionResult<Todo> ChangeItem(Todo todo)
+        public ActionResult<TodoVm> ChangeItem(TodoVm todo)
         {
             try
             {
