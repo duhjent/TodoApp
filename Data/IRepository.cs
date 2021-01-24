@@ -5,9 +5,11 @@ namespace TodoApp.Data
 {
     public interface IRepository
     {
-        IEnumerable<Todo> FindAll();
-        Todo FindById(int id);
-        Todo Add(Todo todo);
-        Todo Update(Todo todo);
+        List<TodoVm> FindAll();
+        TodoVm FindById(int id);
+        TodoVm Add(TodoVm todo);
+        TodoVm Update(TodoVm todo);
+        List<TagVm> GetAllTags();
+
     }
 }
