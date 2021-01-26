@@ -11,10 +11,10 @@ export class TodoService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<TodoItem[]> {
-    return this.http.get<TodoItem[]>('/todos');
+    return this.http.get<TodoItem[]>('/api/todos');
   }
 
   getById(id: number): Observable<TodoItem> {
-    return this.http.get<TodoItem>(`/todos/${id}`);
+    return this.http.get<TodoItem>(`/api/todos/${id}`);
   }
 }
