@@ -1,5 +1,6 @@
-export class TodoItem {
+export interface TodoItem {
     id: number;
     title: string;
-    body: string;
+    isDone: boolean;
+    tags: string[];
 }
