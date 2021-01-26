@@ -1,9 +1,9 @@
 <div>
     <form [formGroup]="form" (ngSubmit)="submitForm()">
         <mat-form-field>
-            <input matInput placeholder="title..." formControlName="title">
+            <input matInput placeholder="Title" formControlName="title">
         </mat-form-field>
-
-        <button mat-raised-button [disabled]="form.invalid" color="primary">Add Todo</button>
+        <br>
+        <button mat-raised-button [disabled]="form.invalid">Add Todo</button>
     </form>
-</div>>
+</div>
