@@ -19,13 +19,23 @@ export class AddTodoComponent implements OnInit {
       title: ['', [
         Validators.required
       ]],
-      tags: []
+      tags: this.fb.array([])
     });
   }
 
+  get tags() {
+    return this.form.get('tags') as FormArray;
+  }
+
+  addTag() {
+    this.tags.push(this.fb.control(''));
+  }
+
   submitForm(): void {
-    console.log(this.form.value);
-    this.store.dispatch(new Todo.Add({isDone: false, title: this.form.value.title, tags: []}));
+    let addTodo = new Todo.Add({isDone: false, title: this.form.value.title, tags: this.form.value.tags})
+    console.log(addTodo.item)
+    this.store.dispatch(addTodo);
+    this.tags.clear();
     this.form.reset();
   }
 
