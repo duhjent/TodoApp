@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { TodoService } from '../services/todo.service';
+import { Todo } from '../shared/todo.actions';
+import { TodoListStateModel } from '../shared/todo.state';
 import { TodoItem } from '../todo-item';
 
 @Component({
@@ -9,14 +13,12 @@ import { TodoItem } from '../todo-item';
 })
 export class TodoListComponent implements OnInit {
 
-  items: TodoItem[];
+  @Select(state => state.todos.todoList) public todoList$: Observable<TodoItem[]>;
   
-  constructor(private service: TodoService) { }
+  constructor(private service: TodoService, private store: Store) { }
 
   ngOnInit(): void {
-    this.service.getAll().subscribe(data => {
-      this.items = data;
-    });
+    this.store.dispatch(new Todo.FetchAll);
   }
 
 }

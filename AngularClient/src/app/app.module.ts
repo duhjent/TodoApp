@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { NgxsModule } from "@ngxs/store";
+import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
 
 import { AppComponent } from './app.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -11,6 +13,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatButtonModule } from "@angular/material/button";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
+import { TodoListState } from './shared/todo.state';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -21,6 +25,8 @@ import { MatInputModule } from "@angular/material/input";
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgxsModule.forRoot([TodoListState], {developmentMode: true}),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatButtonModule,

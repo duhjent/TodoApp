@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validator, Validators } from "@angular/forms";
+import { FormArray, FormBuilder, FormGroup, Validator, Validators } from "@angular/forms";
+import { Store } from '@ngxs/store';
+import { Todo } from '../shared/todo.actions';
 
 @Component({
   selector: 'app-add-todo',
@@ -10,7 +12,7 @@ export class AddTodoComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private store: Store) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -23,6 +25,7 @@ export class AddTodoComponent implements OnInit {
 
   submitForm(): void {
     console.log(this.form.value);
+    this.store.dispatch(new Todo.Add({isDone: false, title: this.form.value.title, tags: []}));
     this.form.reset();
   }
 
