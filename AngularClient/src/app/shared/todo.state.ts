@@ -55,4 +55,21 @@ export class TodoListState {
       })
     );
   }
+
+  @Action(Todo.Edit)
+  editTodo(ctx: StateContext<TodoListStateModel>, action: Todo.Edit) {
+    return this.http.put<TodoItem>('/api/todos', action.item).pipe(
+      tap(data => {
+        const state = ctx.getState();
+        let exceptChosen = state.todoList.filter(t => t.id !== action.item.id);
+        ctx.setState({todoList: [...exceptChosen, data]});
+      }),
+      catchError(async (err) => {
+        console.log(err);
+        this.snackBar.open('Error updating todo', 'OK', {
+          duration: 1000
+        })
+      })
+    )
+  }
 }
