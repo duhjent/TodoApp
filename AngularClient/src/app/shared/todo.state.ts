@@ -58,12 +58,11 @@ export class TodoListState {
 
   @Action(Todo.Edit)
   editTodo(ctx: StateContext<TodoListStateModel>, action: Todo.Edit) {
-    // TODO dont put the edited item to the end
     return this.http.put<TodoItem>('/api/todos', action.item).pipe(
       tap(data => {
         const state = ctx.getState();
-        let exceptChosen = state.todoList.filter(t => t.id !== action.item.id);
-        ctx.setState({...state, todoList: [...exceptChosen, data]});
+        let newList = state.todoList.map(t => t = t.id == action.item.id ? data : t);
+        ctx.setState({...state, todoList: newList});
       }),
       catchError(async (err) => {
         console.log(err);
