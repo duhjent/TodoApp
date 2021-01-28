@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Todo } from '../shared/todo.actions';
@@ -16,17 +16,26 @@ export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
   itemClone: TodoItem;
 
+  @Select(state => state.todos.todoList) public todoList$: Observable<TodoItem[]>;
+  tagHints: string[];
+  filteredHints: Observable<string[]>;
+
   newTag = this.fb.control('');
 
-  options: string[] = ['home', 'univerisity', 'anime'];
-  filteredOptions: Observable<string[]>;
 
   constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.itemClone = Object.assign({}, this.item);
     this.itemClone.tags = Object.assign([], this.item.tags);
-    this.filteredOptions = this.newTag.valueChanges.pipe(
+
+    this.todoList$
+      .subscribe(vals => this.tagHints = vals.map(t => t.tags) // choose tags of each todo item
+                                              .reduce((accumulator, value) => accumulator.concat(value), []) // flatten the array
+                                              .filter((v, i, a) => a.indexOf(v) === i) // choose unique only
+                                              .filter(v => !this.itemClone.tags.includes(v))); // filter tags that are already added
+
+    this.filteredHints = this.newTag.valueChanges.pipe(
       startWith(''),
       map(val => this._filter(val))
     );
@@ -47,7 +56,7 @@ export class TodoItemComponent implements OnInit {
 
   addTag() {
     if (this.newTag.value === '' ||
-        this.itemClone.tags.includes(this.newTag.value)) {
+      this.itemClone.tags.includes(this.newTag.value)) {
       return;
     }
     this.itemClone.tags.push(this.newTag.value);
@@ -57,7 +66,7 @@ export class TodoItemComponent implements OnInit {
   private _filter(val: string): string[] {
     let filterVal = val.toLowerCase();
 
-    return this.options.filter(o => o.toLowerCase().includes(filterVal));
+    return this.tagHints.filter(o => o.toLowerCase().includes(filterVal));
   }
 
 }
