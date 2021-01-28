@@ -58,6 +58,7 @@ export class TodoListState {
 
   @Action(Todo.Edit)
   editTodo(ctx: StateContext<TodoListStateModel>, action: Todo.Edit) {
+    // TODO dont put the edited item to the end
     return this.http.put<TodoItem>('/api/todos', action.item).pipe(
       tap(data => {
         const state = ctx.getState();

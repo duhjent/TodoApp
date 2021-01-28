@@ -1,4 +1,19 @@
-<div style="display: flex;">
-    <p>{{ item.title }}</p>
-    <button mat-flat-button (click)="deleteItem()"><mat-icon>delete</mat-icon></button>
-</div>
+<mat-checkbox [(ngModel)]="itemClone.isDone" (ngModelChange)="updateItem()">
+    <p>{{ itemClone.title }}</p>
+</mat-checkbox>
+<button mat-flat-button (click)="deleteItem()">
+    <mat-icon>delete</mat-icon>
+</button>
+<br>
+<ul>
+    <li *ngFor="let tag of itemClone.tags">
+        {{tag}}
+        <button class="button" mat-icon-button (click)="deleteTag(tag)"><mat-icon>close</mat-icon></button>
+    </li>
+    <li>
+        <mat-form-field>
+            <input matInput type="text" [(ngModel)]="newTag">
+        </mat-form-field>
+        <button class="button" mat-icon-button (click)="addTag()"><mat-icon>add</mat-icon></button>
+    </li>
+</ul>

@@ -21,7 +21,7 @@ export namespace Todo {
   }
 
   export class Edit {
-    static readonly type = '[Todo] edit';
+    static readonly type = '[Todo] Edit';
     constructor(public item: TodoItem) { }
   }
 }
