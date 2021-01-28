@@ -1,5 +1,9 @@
 <div>
-    <div *ngFor="let todo of todoList$ | async">
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search term..." [(ngModel)]="searchTerm">
+    </mat-form-field>
+    <div *ngFor="let todo of todoList$ | async | search: searchTerm">
         <app-todo-item [item]="todo"></app-todo-item>
     </div>
 </div>

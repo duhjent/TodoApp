@@ -11,6 +11,8 @@ import { TodoItem } from '../domain';
 export class TodoListComponent implements OnInit {
 
   @Select(state => state.todos.todoList) public todoList$: Observable<TodoItem[]>;
+
+  searchTerm: string = '';
   
   constructor(private store: Store) { }
 
