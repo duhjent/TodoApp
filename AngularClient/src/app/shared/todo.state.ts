@@ -1,5 +1,5 @@
 import { HttpClient } from "@angular/common/http";
-import { Action, State, StateContext } from "@ngxs/store";
+import { Action, NgxsOnInit, State, StateContext } from "@ngxs/store";
 import { TodoItem } from "../todo-item";
 import { Todo } from "./todo.actions";
 import { catchError, tap } from "rxjs/operators";
@@ -17,8 +17,12 @@ export interface TodoListStateModel {
   }
 })
 @Injectable()
-export class TodoListState {
+export class TodoListState implements NgxsOnInit {
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+
+  ngxsOnInit(ctx?: StateContext<any>) {
+    ctx.dispatch(new Todo.FetchAll());
+  }
 
   @Action(Todo.FetchAll)
   fetchTodos(ctx: StateContext<TodoListStateModel>) {
