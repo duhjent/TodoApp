@@ -48,5 +48,15 @@ namespace TodoApp.Controllers
                 return NotFound();
             }
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteItem(int id) {
+            try {
+                _repo.Delete(id);
+            } catch(ItemNotFoundException) {
+                return NotFound();
+            }
+            return Ok();
+        }
     }
 }
