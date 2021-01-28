@@ -1,4 +1,4 @@
-<div>
+<div class="add-container">
     <form [formGroup]="form" (ngSubmit)="submitForm()">
         <mat-form-field>
             <input matInput placeholder="Title" formControlName="title">
@@ -10,6 +10,9 @@
                 <mat-form-field>
                     <input matInput placeholder="New tag" [formControlName]="i">
                 </mat-form-field>
+                <button type="button" mat-flat-button (click)="deleteTag(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
             </div>
             <button type="button" mat-flat-button (click)="addTag()">
                 <mat-icon>add</mat-icon>

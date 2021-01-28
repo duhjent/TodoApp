@@ -4,6 +4,7 @@ import { TodoItem } from "../todo-item";
 import { Todo } from "./todo.actions";
 import { catchError, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 export interface TodoListStateModel {
   todoList: TodoItem[];
@@ -17,7 +18,7 @@ export interface TodoListStateModel {
 })
 @Injectable()
 export class TodoListState {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   @Action(Todo.FetchAll)
   fetchTodos(ctx: StateContext<TodoListStateModel>) {
@@ -29,7 +30,13 @@ export class TodoListState {
           todoList: data
         });
       }),
-      catchError(async (err) => console.log(err))
+      catchError(async (err) => 
+      {
+        console.log(err);
+        this.snackBar.open('Error fetching todos', 'OK', {
+          duration: 1000
+        });
+      })
     );
   }
 
@@ -40,7 +47,12 @@ export class TodoListState {
         const state = ctx.getState();
         ctx.setState({...state, todoList: [...state.todoList, data]});
       }),
-      catchError(async (err) => console.log(err))
+      catchError(async (err) => {
+        console.log(err);
+        this.snackBar.open('Error adding todo', 'OK', {
+          duration: 1000
+        })
+      })
     );
   }
 }
