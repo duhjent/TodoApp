@@ -9,7 +9,7 @@ namespace TodoApp.Data
         TodoVm FindById(int id);
         TodoVm Add(TodoVm todo);
         TodoVm Update(TodoVm todo);
+        void Delete(int id);
         List<TagVm> GetAllTags();
-
     }
 }

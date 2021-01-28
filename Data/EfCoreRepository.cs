@@ -93,6 +93,25 @@ namespace TodoApp.Data
             return todo;
         }
 
+        public void Delete(int id)
+        {
+            var found = _ctx.Todos.Include(t => t.Tags).FirstOrDefault(t => t.Id == id);
+            if(found == null) {
+                throw new ItemNotFoundException();
+            }
+
+            var potentialTagsToDelete = _ctx.Tags.Include(t => t.Todos)
+                .Where(t => t.Todos.Count == 1)
+                .ToList();
+
+            var tagsToDelete = potentialTagsToDelete.Where(t => found.Tags.Any(tt => tt.TagId == t.Id)).ToList();
+
+            _ctx.RemoveRange(tagsToDelete);
+            _ctx.Remove(found);
+
+            _ctx.SaveChanges();
+        }
+
         public List<TagVm> GetAllTags()
         {
             var tagList = _ctx.Tags
