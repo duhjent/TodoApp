@@ -20,13 +20,15 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { TodoListState } from './shared/todo.state';
 import { environment } from 'src/environments/environment';
 import { TodoItemComponent } from './todo-item/todo-item.component';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     AddTodoComponent,
-    TodoItemComponent
+    TodoItemComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
