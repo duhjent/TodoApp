@@ -62,7 +62,7 @@ export class TodoListState {
       tap(data => {
         const state = ctx.getState();
         let exceptChosen = state.todoList.filter(t => t.id !== action.item.id);
-        ctx.setState({todoList: [...exceptChosen, data]});
+        ctx.setState({...state, todoList: [...exceptChosen, data]});
       }),
       catchError(async (err) => {
         console.log(err);
@@ -70,6 +70,22 @@ export class TodoListState {
           duration: 1000
         })
       })
-    )
+    );
+  }
+
+  @Action(Todo.Delete)
+  deleteTodo(ctx: StateContext<TodoListStateModel>, action: Todo.Delete) {
+    return this.http.delete(`/api/todos/${action.id}`).pipe(
+      tap(data => {
+        const state = ctx.getState();
+        ctx.setState({...state, todoList: [...state.todoList.filter(t => t.id != action.id)]});
+      }),
+      catchError(async (err) => {
+        console.log(err);
+        this.snackBar.open('Error deleting todo', 'OK', {
+          duration: 1000
+        })
+      })
+    );
   }
 }

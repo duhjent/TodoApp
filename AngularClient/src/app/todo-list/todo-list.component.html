@@ -1,7 +1,7 @@
 <div>
     <ul>
-        <li *ngFor="let item of todoList$ | async">
-            <p [ngClass]="{'completed': item.isDone}">{{item.title}}</p>
+        <li *ngFor="let todo of todoList$ | async">
+            <app-todo-item [item]="todo"></app-todo-item>
         </li>
     </ul>
 </div>
