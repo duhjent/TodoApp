@@ -1,7 +1,7 @@
 <mat-checkbox [(ngModel)]="itemClone.isDone" (ngModelChange)="updateItem()">
     <p>{{ itemClone.title }}</p>
 </mat-checkbox>
-<button mat-flat-button (click)="deleteItem()">
+<button mat-icon-button (click)="deleteItem()">
     <mat-icon>delete</mat-icon>
 </button>
 <br>

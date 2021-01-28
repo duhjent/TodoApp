@@ -46,7 +46,8 @@ export class TodoItemComponent implements OnInit {
   }
 
   addTag() {
-    if(this.newTag.value === '') {
+    if (this.newTag.value === '' ||
+        this.itemClone.tags.includes(this.newTag.value)) {
       return;
     }
     this.itemClone.tags.push(this.newTag.value);
