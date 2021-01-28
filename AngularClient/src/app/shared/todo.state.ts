@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Action, NgxsOnInit, State, StateContext } from "@ngxs/store";
-import { TodoItem } from "../todo-item";
+import { TodoItem } from "../domain";
 import { Todo } from "./todo.actions";
 import { catchError, tap } from "rxjs/operators";
 import { Injectable } from "@angular/core";

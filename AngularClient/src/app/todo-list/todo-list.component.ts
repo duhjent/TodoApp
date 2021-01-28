@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { Todo } from '../shared/todo.actions';
-import { TodoItem } from '../todo-item';
+import { TodoItem } from '../domain';
 
 @Component({
   selector: 'app-todo-list',

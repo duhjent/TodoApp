@@ -4,7 +4,7 @@ import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Todo } from '../shared/todo.actions';
-import { TodoItem } from '../todo-item';
+import { TodoItem } from '../domain';
 
 @Component({
   selector: 'app-todo-item',

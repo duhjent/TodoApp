@@ -1,4 +1,4 @@
-import { TodoItem } from "../todo-item";
+import { TodoItem } from "../domain";
 
 export namespace Todo {
   export class FetchAll {
