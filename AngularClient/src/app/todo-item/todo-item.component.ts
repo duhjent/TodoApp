@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Todo } from '../shared/todo.actions';
 import { TodoItem } from '../todo-item';
 
@@ -13,13 +16,20 @@ export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
   itemClone: TodoItem;
 
-  newTag: string = '';
+  newTag = this.fb.control('');
 
-  constructor(private store: Store) { }
+  options: string[] = ['home', 'univerisity', 'anime'];
+  filteredOptions: Observable<string[]>;
+
+  constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.itemClone = Object.assign({}, this.item);
     this.itemClone.tags = Object.assign([], this.item.tags);
+    this.filteredOptions = this.newTag.valueChanges.pipe(
+      startWith(''),
+      map(val => this._filter(val))
+    );
   }
 
   deleteItem() {
@@ -36,11 +46,17 @@ export class TodoItemComponent implements OnInit {
   }
 
   addTag() {
-    if(this.newTag === '') {
+    if(this.newTag.value === '') {
       return;
     }
-    this.itemClone.tags.push(this.newTag);
+    this.itemClone.tags.push(this.newTag.value);
     this.updateItem();
+  }
+
+  private _filter(val: string): string[] {
+    let filterVal = val.toLowerCase();
+
+    return this.options.filter(o => o.toLowerCase().includes(filterVal));
   }
 
 }
