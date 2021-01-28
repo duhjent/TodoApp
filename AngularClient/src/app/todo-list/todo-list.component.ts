@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { TodoService } from '../services/todo.service';
-import { Todo } from '../shared/todo.actions';
-import { TodoListStateModel } from '../shared/todo.state';
-import { TodoItem } from '../todo-item';
+import { TodoItem } from '../domain';
 
 @Component({
   selector: 'app-todo-list',
@@ -15,10 +12,9 @@ export class TodoListComponent implements OnInit {
 
   @Select(state => state.todos.todoList) public todoList$: Observable<TodoItem[]>;
   
-  constructor(private service: TodoService, private store: Store) { }
+  constructor(private store: Store) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new Todo.FetchAll);
   }
 
 }

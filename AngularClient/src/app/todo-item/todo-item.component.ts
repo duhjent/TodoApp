@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { Todo } from '../shared/todo.actions';
-import { TodoItem } from '../todo-item';
+import { TodoItem } from '../domain';
 
 @Component({
   selector: 'app-todo-item',
@@ -13,13 +16,29 @@ export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
   itemClone: TodoItem;
 
-  newTag: string = '';
+  @Select(state => state.todos.todoList) public todoList$: Observable<TodoItem[]>;
+  tagHints: string[];
+  filteredHints: Observable<string[]>;
 
-  constructor(private store: Store) { }
+  newTag = this.fb.control('');
+
+
+  constructor(private store: Store, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.itemClone = Object.assign({}, this.item);
     this.itemClone.tags = Object.assign([], this.item.tags);
+
+    this.todoList$
+      .subscribe(vals => this.tagHints = vals.map(t => t.tags) // choose tags of each todo item
+                                              .reduce((accumulator, value) => accumulator.concat(value), []) // flatten the array
+                                              .filter((v, i, a) => a.indexOf(v) === i) // choose unique only
+                                              .filter(v => !this.itemClone.tags.includes(v))); // filter tags that are already added
+
+    this.filteredHints = this.newTag.valueChanges.pipe(
+      startWith(''),
+      map(val => this._filter(val))
+    );
   }
 
   deleteItem() {
@@ -36,11 +55,18 @@ export class TodoItemComponent implements OnInit {
   }
 
   addTag() {
-    if(this.newTag === '') {
+    if (this.newTag.value === '' ||
+      this.itemClone.tags.includes(this.newTag.value)) {
       return;
     }
-    this.itemClone.tags.push(this.newTag);
+    this.itemClone.tags.push(this.newTag.value);
     this.updateItem();
+  }
+
+  private _filter(val: string): string[] {
+    let filterVal = val.toLowerCase();
+
+    return this.tagHints.filter(o => o.toLowerCase().includes(filterVal));
   }
 
 }

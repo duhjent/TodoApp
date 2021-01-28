@@ -4,3 +4,8 @@ export interface TodoItem {
     isDone: boolean;
     tags: string[];
 }
+
+export interface Tag {
+    name: string;
+    todos: TodoItem[];
+}
