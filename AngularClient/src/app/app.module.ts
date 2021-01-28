@@ -17,12 +17,14 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { TodoListState } from './shared/todo.state';
 import { environment } from 'src/environments/environment';
+import { TodoItemComponent } from './todo-item/todo-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
-    AddTodoComponent
+    AddTodoComponent,
+    TodoItemComponent
   ],
   imports: [
     BrowserModule,
