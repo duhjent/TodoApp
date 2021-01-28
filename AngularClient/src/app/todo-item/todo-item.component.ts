@@ -16,12 +16,13 @@ export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
   itemClone: TodoItem;
 
+  editing: boolean = false;
+
   @Select(state => state.todos.todoList) public todoList$: Observable<TodoItem[]>;
   tagHints: string[];
   filteredHints: Observable<string[]>;
 
   newTag = this.fb.control('');
-
 
   constructor(private store: Store, private fb: FormBuilder) { }
 

@@ -1,6 +1,15 @@
-<mat-checkbox [(ngModel)]="itemClone.isDone" (ngModelChange)="updateItem()">
-    <p>{{ itemClone.title }}</p>
-</mat-checkbox>
+<span *ngIf="!editing">
+    <mat-checkbox [(ngModel)]="itemClone.isDone" (ngModelChange)="updateItem()">
+        <p>{{ itemClone.title }}</p>
+    </mat-checkbox>
+    <button mat-icon-button (click)="editing = !editing"><mat-icon>edit</mat-icon></button>
+</span>
+<span *ngIf="editing">
+    <mat-form-field>
+        <input matInput [(ngModel)]="itemClone.title">
+    </mat-form-field>
+    <button mat-icon-button (click)="updateItem(); editing = !editing"><mat-icon>done</mat-icon></button>
+</span>
 <button mat-icon-button (click)="deleteItem()">
     <mat-icon>delete</mat-icon>
 </button>
