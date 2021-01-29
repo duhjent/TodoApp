@@ -17,6 +17,7 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatChipsModule } from "@angular/material/chips";
 import { TodoListState } from './shared/todo.state';
 import { environment } from 'src/environments/environment';
 import { TodoItemComponent } from './todo-item/todo-item.component';
@@ -46,7 +47,8 @@ import { TagPipe } from './pipes/tag.pipe';
     MatIconModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

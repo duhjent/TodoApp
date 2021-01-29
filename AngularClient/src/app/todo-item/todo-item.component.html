@@ -16,7 +16,7 @@
 <br>
 <ul>
     <li *ngFor="let tag of itemClone.tags">
-        {{tag}}
+        <span (click)="addToFilter(tag)">{{tag}}</span>
         <button class="button" mat-icon-button (click)="deleteTag(tag)"><mat-icon>close</mat-icon></button>
     </li>
     <li>

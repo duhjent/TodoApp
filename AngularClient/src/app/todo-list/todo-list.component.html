@@ -3,7 +3,13 @@
         <mat-label>Search</mat-label>
         <input matInput placeholder="Search term..." [(ngModel)]="searchTerm">
     </mat-form-field>
-    <div *ngFor="let todo of todoList$ | async | search: searchTerm">
-        <app-todo-item [item]="todo"></app-todo-item>
+    <mat-chip-list>
+        <mat-chip *ngFor="let requiredTag of requiredTags" (removed)="removeTag(requiredTag)">
+            {{requiredTag}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+    </mat-chip-list>
+    <div *ngFor="let todo of todoList$ | async | search: searchTerm | tag: requiredTags">
+        <app-todo-item (updateTagFilter)="requiredTags.push($event)" [item]="todo"></app-todo-item>
     </div>
 </div>

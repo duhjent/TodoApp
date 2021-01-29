@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -23,6 +23,8 @@ export class TodoItemComponent implements OnInit {
   filteredHints: Observable<string[]>;
 
   newTag = this.fb.control('');
+
+  @Output() updateTagFilter = new EventEmitter<string>();
 
   constructor(private store: Store, private fb: FormBuilder) { }
 
@@ -62,6 +64,10 @@ export class TodoItemComponent implements OnInit {
     }
     this.itemClone.tags.push(this.newTag.value);
     this.updateItem();
+  }
+
+  addToFilter(tag: string) {
+    this.updateTagFilter.emit(tag);
   }
 
   private _filter(val: string): string[] {
