@@ -21,6 +21,7 @@ import { TodoListState } from './shared/todo.state';
 import { environment } from 'src/environments/environment';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { SearchPipe } from './pipes/search.pipe';
+import { TagPipe } from './pipes/tag.pipe';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { SearchPipe } from './pipes/search.pipe';
     TodoListComponent,
     AddTodoComponent,
     TodoItemComponent,
-    SearchPipe
+    SearchPipe,
+    TagPipe
   ],
   imports: [
     BrowserModule,
