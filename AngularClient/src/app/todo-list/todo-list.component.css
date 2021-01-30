@@ -1,0 +1,9 @@
+.list-container {
+    width: 500px;
+}
+
+.scrollable-container {
+    height: 100%;
+    margin: 0em;
+    overflow-y: auto;
+}

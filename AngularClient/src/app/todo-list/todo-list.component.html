@@ -1,4 +1,4 @@
-<div>
+<div class="list-container">
     <mat-form-field>
         <mat-label>Search</mat-label>
         <input matInput placeholder="Search term..." [(ngModel)]="searchTerm">
@@ -9,7 +9,9 @@
             <mat-icon matChipRemove>cancel</mat-icon>
         </mat-chip>
     </mat-chip-list>
-    <div *ngFor="let todo of todoList$ | async | search: searchTerm | tag: requiredTags">
-        <app-todo-item (updateTagFilter)="requiredTags.push($event)" [item]="todo"></app-todo-item>
+    <div class="scrollable-container">
+        <div *ngFor="let todo of todoList$ | async | search: searchTerm | tag: requiredTags">
+            <app-todo-item (updateTagFilter)="requiredTags.push($event)" [item]="todo"></app-todo-item>
+        </div>
     </div>
 </div>
