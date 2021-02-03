@@ -1,29 +1,16 @@
-.tag {
-    padding: 7px;
-}
-
-.tag:hover {
-    cursor: pointer;
-    background: rgb(235, 235, 235);
-    border-radius: 5px;
-}
-
-.mat-form-field-infix {
-    padding: 0;
-    border: 0;
-}
-
-ul {
-    list-style: none;
-}
-
-.item-done {
+.item-done p {
     text-decoration: line-through;
 }
 
 .card {
     margin: 10px 0;
-    padding: 5px 30px;
+    padding: 0 30px;
+    padding-bottom: 30px;
+    background: rgba(147, 164, 195, 0.336);
+}
+
+.item-done {
+    background: rgba(147, 164, 195, 0.137);
 }
 
 .todo-title {

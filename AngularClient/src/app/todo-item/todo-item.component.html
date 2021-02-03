@@ -1,8 +1,8 @@
-<mat-card class="card">
+<mat-card [ngClass]="{'item-done':itemClone.isDone}" class="card">
     <mat-card-header>
         <span *ngIf="!editing" class="todo-title">
             <mat-checkbox [(ngModel)]="itemClone.isDone" (ngModelChange)="updateItem()">
-                <p [ngClass]="{'item-done':itemClone.isDone}">{{ itemClone.title }}</p>
+                <p>{{ itemClone.title }}</p>
             </mat-checkbox>
             <button mat-icon-button (click)="editing = !editing">
                 <mat-icon>edit</mat-icon>

@@ -19,7 +19,7 @@ export class AddTodoComponent implements OnInit {
       title: ['', [
         Validators.required
       ]],
-      tags: this.fb.array([])
+      tags: this.fb.array([this.fb.control('')])
     });
   }
 
