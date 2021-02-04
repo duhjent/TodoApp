@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { TodoItem } from '../domain';
 
 @Pipe({
-  name: 'search'
+  name: 'search',
+  pure: false
 })
 export class SearchPipe implements PipeTransform {
 

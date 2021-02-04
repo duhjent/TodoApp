@@ -2,7 +2,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { TodoItem } from '../domain';
 
 @Pipe({
-  name: 'tag'
+  name: 'tag',
+  pure: false
 })
 export class TagPipe implements PipeTransform {
 
