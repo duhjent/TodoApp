@@ -1,25 +1,27 @@
 <mat-card [ngClass]="{'item-done':itemClone.isDone}" class="card">
     <mat-card-header>
         <mat-card-title>
-            <span *ngIf="!editing" class="todo-title">
+            <div *ngIf="!editing" class="todo-title">
                 <mat-checkbox [(ngModel)]="itemClone.isDone" (ngModelChange)="updateItem()">
                     <p>{{ itemClone.title }}</p>
                 </mat-checkbox>
-                <button mat-icon-button (click)="editing = !editing">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button (click)="deleteItem()">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </span>
-            <span *ngIf="editing">
+                <span class="todo-controls">
+                    <button mat-icon-button (click)="editing = !editing">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteItem()">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </span>
+            </div>
+            <div *ngIf="editing">
                 <mat-form-field class="edit-input">
                     <input matInput [(ngModel)]="itemClone.title">
                 </mat-form-field>
                 <button mat-icon-button (click)="updateItem(); editing = !editing">
                     <mat-icon>done</mat-icon>
                 </button>
-            </span>
+            </div>
         </mat-card-title>
     </mat-card-header>
     <mat-card-content>

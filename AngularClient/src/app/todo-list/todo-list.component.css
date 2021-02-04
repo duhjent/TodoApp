@@ -3,7 +3,6 @@
 }
 
 .scrollable-container {
-    height: 100%;
-    margin: 0em;
+    height: 770px;
     overflow-y: auto;
 }
