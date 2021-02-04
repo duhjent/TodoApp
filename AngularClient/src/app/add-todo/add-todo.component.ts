@@ -36,9 +36,10 @@ export class AddTodoComponent implements OnInit {
   }
 
   submitForm(): void {
-    let addTodo = new Todo.Add({isDone: false, title: this.form.value.title, tags: this.form.value.tags})
+    let addTodo = new Todo.Add({isDone: false, title: this.form.value.title, tags: this.tags.value})
     this.store.dispatch(addTodo);
     this.tags.clear();
+    this.tags.push(this.fb.control(''));
     this.form.reset();
   }
 
