@@ -1,0 +1,24 @@
+.item-done p {
+    text-decoration: line-through;
+}
+
+.card {
+    margin: 10px 0;
+    padding: 0 30px;
+    padding-bottom: 30px;
+    background: rgba(147, 164, 195, 0.336);
+}
+
+.item-done {
+    background: rgba(147, 164, 195, 0.137);
+}
+
+.todo-title {
+    padding: 12.6px 0;
+    border-top: .84375em solid transparent;
+}
+
+mat-card-header {
+    justify-content: center;
+    font-size: 1.4em;
+}

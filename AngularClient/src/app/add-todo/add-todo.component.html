@@ -1,24 +1,23 @@
-<div class="add-container">
-    <form [formGroup]="form" (ngSubmit)="submitForm()">
-        <mat-form-field>
-            <input matInput placeholder="Title" formControlName="title">
-        </mat-form-field>
-        <br>
-        <div formArrayName="tags">
-            <h3>Tags:</h3>
-            <div *ngFor="let tag of tags.controls; let i = index">
-                <mat-form-field>
-                    <input matInput placeholder="New tag" [formControlName]="i">
-                </mat-form-field>
-                <button type="button" mat-flat-button (click)="deleteTag(i)">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
-            <button type="button" mat-flat-button (click)="addTag()">
-                <mat-icon>add</mat-icon>
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+    <mat-form-field class="title-input" appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="title..." formControlName="title">
+    </mat-form-field>
+    <br>
+    <div formArrayName="tags">
+        <h3>Tags:</h3>
+        <div *ngFor="let tag of tags.controls; let i = index">
+            <mat-form-field class="tag-input">
+                <input matInput placeholder="New tag" [formControlName]="i">
+            </mat-form-field>
+            <button type="button" mat-icon-button (click)="deleteTag(i)">
+                <mat-icon>delete</mat-icon>
             </button>
         </div>
-        <br>
-        <button mat-raised-button [disabled]="form.invalid">Add Todo</button>
-    </form>
-</div>
+        <button type="button" mat-flat-button (click)="addTag()">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+    <br>
+    <button class="submit-button" mat-raised-button [disabled]="form.invalid">Add Todo</button>
+</form>

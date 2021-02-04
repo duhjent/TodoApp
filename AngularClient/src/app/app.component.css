@@ -1,6 +1,14 @@
 .container {
     display: flex;
+    justify-content: space-between;
+    margin: auto;
     justify-content: center;
     min-width: 70%;
     max-width: 80%;
+}
+
+.submit-container {
+    margin: 300px 300px 300px 0;
+    
+    width: 300px;
 }

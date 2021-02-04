@@ -46,6 +46,7 @@ export class TodoListState implements NgxsOnInit {
 
   @Action(Todo.Add)
   addTodo(ctx: StateContext<TodoListStateModel>, action: Todo.Add) {
+    action.item.tags = action.item.tags.filter(t => t !== '');
     return this.http.post<TodoItem>('/api/todos', action.item).pipe(
       tap(data => {
         const state = ctx.getState();
