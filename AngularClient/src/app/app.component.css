@@ -8,5 +8,7 @@
 }
 
 .submit-container {
-    margin: 300px 0;
+    margin: 300px 100px 300px 0;
+    
+    width: 300px;
 }
